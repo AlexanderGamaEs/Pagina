@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="{% static "images/icon64.png" %}">
+        
+        {% block js  %}
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="{% static "js/background.js" %}"></script>
+        {% endblock  %}
+        
+        {% block css  %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/mainstyle.css" %}"/>   
+        {% endblock  %}
+
+        {% block extrajs  %}{% endblock  %}
+        {% block extracss  %}{% endblock  %}
+        <title>Heikō - {% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+    </body>
+</html>

@@ -21,7 +21,10 @@ class UserProfile(models.Model):
     	blank=False, 
     	null=False,
     	)
-    pic = models.ImageField(upload_to='profile_images', blank=True)
+    pic = models.ImageField(
+    	upload_to='profile_images', 
+    	blank=True)
+    enable = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
