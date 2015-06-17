@@ -19,6 +19,8 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 STATIC_PATH = os.path.join(BASE_DIR,'static')
 
+DATABASE_LOCAL = True
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -79,14 +81,22 @@ WSGI_APPLICATION = 'academia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'academia',
-        'USER': 'main_user',
-        'PASSWORD': 'MyPass1234',
+if DATABASE_LOCAL is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        },
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'academia',
+            'USER': 'main_user',
+            'PASSWORD': 'MyPass1234',
+        }
+    }
 
 
 # Internationalization
