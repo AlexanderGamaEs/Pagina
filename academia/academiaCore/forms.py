@@ -3,6 +3,11 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnly
 from django.contrib.auth.models import User
 from academiaCore.models import UserProfile
 
+class LoginUserForm(forms.ModelForm):
+	class Meta:
+        model = User
+        fields = ('email', 'password')
+
 class RegisterUserForm(forms.ModelForm):
     password1 = forms.CharField(
         required=True,

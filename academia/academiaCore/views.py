@@ -1,5 +1,23 @@
 from django.shortcuts import render
-from academiaCore.forms import RegisterUserForm, RegisterUserProfileForm
+from academiaCore.forms import LoginUserForm, RegisterUserForm, RegisterUserProfileForm
+
+def login(request):
+    if request.method == 'POST':
+    	user_form = LoginUserForm(data=request.POST)
+
+        user = authenticate(username=user_form.username, password=user_form.password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/user/')
+        else:
+            print "Invalid login details: {0}, {1}".format(username, password)
+            return HttpResponse("Invalid login details supplied.")
+    else:
+    	user_form = LoginUserForm()
+        return render(request, 'user/login.htm', {'user_form': user_form})
+
 
 def register(request):
     registered = False
@@ -23,6 +41,7 @@ def register(request):
             profile.save()
 
             registered = True
+            return HttpResponseRedirect('/user/')
         else:
             print(user_form.errors, profile_form.errors)
     else:

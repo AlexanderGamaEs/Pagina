@@ -8,6 +8,11 @@ html{
 body{
     color:#FFFFFF;
     font-family:  'Abel',Arial, Helvetica, sans-serif;
+    background: url(/static/images/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
     width: 100%;
     height: 100%;
     min-width: 1366px;
@@ -63,6 +68,27 @@ body{
     -1px 1px 0 #000,
      1px 1px 0 #000;
      color: #F5F6CE;
+}
+
+.items{
+	margin: 0;low;
+    position: absolute;
+    top: 36%;
+    left: 90%;
+    width: 8%;
+    height: 16%;
+    min-width: 16px;
+    min-height: 18px;
+}
+
+#item-familia{
+    background:transparent url(/static/images/items/item3.png) no-repeat top left;
+    background-size: 100% 100%;
+}
+
+#item-familia:hover{
+    background:transparent url(/static/images/items/item3hover.png) no-repeat top left;
+    background-size: 100% 100%;
 }
 
 
