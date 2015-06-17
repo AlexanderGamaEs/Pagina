@@ -6,9 +6,9 @@
 
 
 {% block body_block %}
-    <h1>Login to Rango</h1>
+    <h1>Registro</h1>
 
-    <form id="login_form" method="post" action="/user/login/">
+    <form id="login_form" method="post" action="/user/register/">
         {% csrf_token %}
 
         {{ user_form.as_p }}
