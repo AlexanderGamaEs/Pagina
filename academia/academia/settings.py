@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     'academiaCore',
+    'familia',
 )
 
 MIDDLEWARE_CLASSES = (

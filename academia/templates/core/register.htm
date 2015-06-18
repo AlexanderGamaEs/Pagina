@@ -6,14 +6,21 @@
 
 
 {% block body_block %}
+<div class="content">
+    <br/><br/>
+    
     <h1>Registro</h1>
+    <br/>
 
-    <form id="login_form" method="post" action="/user/register/">
+    <form id="login_form" method="post" action="/familia/register/">
         {% csrf_token %}
 
         {{ user_form.as_p }}
         {{ profile_form.as_p }}      
         <input type="submit" name="submit" value="Registrarse" />
     </form>
+
+    <br/><br/><br/>
+</div>
 {% endblock %}
 

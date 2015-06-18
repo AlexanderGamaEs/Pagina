@@ -6,16 +6,21 @@
 
 
 {% block body_block %}
-    <h1>Registro</h1>
 
-    <form id="login_form" method="post" action="/user/login/">
+<div class="content">
+    <br/><br/><br/>
+    <h1>Inicia sesión</h1> 
+    <br/>
+    <form id="login_form" method="post" action="/familia/login/">
         {% csrf_token %}
 
         {{ user_form.as_p }}     
         <input type="submit" name="submit" value="Entrar" />
 
         <br/>
-        <a href="/user/register/"> <p>Registrarse</p> </a>
+        <a href="/familia/register/"> <p>Registrarse</p> </a>
     </form>
+    <br/><br/><br/>
+</div>
 {% endblock %}
 
