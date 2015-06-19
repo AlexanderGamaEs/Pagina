@@ -39,7 +39,7 @@ class RegisterUserForm(forms.ModelForm):
         user.set_password(data.get("password1"))
 
         nUserName = "".join(data.get("first_name").split() + data.get("last_name").split())
-        user.set_username((len(nUserName) > 40)? nUserName[0:40] : nUserName)
+        user.set_username( nUserName[0:39] if (len(nUserName) > 40) else nUserName)
 
         if commit:
             user.save()
