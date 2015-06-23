@@ -36,10 +36,10 @@ class RegisterUserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(RegisterUserForm, self).save(commit=False)
-        user.set_password(data.get("password1"))
+        user.set_password(self.data.get("password1"))
 
-        nUserName = "".join(data.get("first_name").split() + data.get("last_name").split())
-        user.set_username((len(nUserName) > 40)? nUserName[0:40] : nUserName)
+        nUserName = "".join(self.data.get("first_name").split() + self.data.get("last_name").split())
+        user.username = nUserName[0:40] if (len(nUserName) > 40) else nUserName
 
         if commit:
             user.save()
