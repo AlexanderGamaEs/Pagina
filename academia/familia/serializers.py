@@ -5,7 +5,7 @@ from academiaCore.models import UserProfile, TYPE_OF_USER
 
 class UserProfileSerializer(serializers.Serializer):
     pk = serializers.IntegerField(read_only=True)
-    user = serializers.OneToOneField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
     user_type = serializers.ChoiceField(choices=TYPE_OF_USER, required=True)
     birthday = serializers.DateField(required=True)
     pic = serializers.ImageField(required=False)

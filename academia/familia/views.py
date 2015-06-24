@@ -1,15 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from familia.forms import LoginUserForm, RegisterUserForm, RegisterUserProfileForm
 
 def index(request):
-    return HttpResponse("Index: En construcción")
+    if not request.user.is_authenticated():
+        return login(request)
+    
+    return HttpResponse("Index: En construcción " + request.user.get_username())
 
 def login(request):
     if request.method == 'POST':
         user_form = LoginUserForm(data=request.POST)
 
-        user = authenticate(email=user_form.email, password=user_form.password)
+        userWithEmail = get_object_or_404(User, email=user_form.data.get('email'))
+        user = authenticate(username=userWithEmail, password=user_form.data.get('password'))
 
         if user:
             if user.is_active:

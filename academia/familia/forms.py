@@ -3,13 +3,23 @@ from django.contrib.auth.models import User
 from academiaCore.models import UserProfile
 
 class LoginUserForm(forms.ModelForm):
+    emailLog = forms.CharField(
+        required=True,
+        label = "Correo electronico",)
+    passwordLog = forms.CharField(
+        required=True,
+        label = "Contraseña",
+        widget=forms.widgets.PasswordInput,
+        max_length=40,)
+
+    def clean(self):
+        data = super(LoginUserForm, self).clean()
+        email = self.data.get('emailLog')
+        password = self.data.get('passwordLog')
+    
     class Meta:
         model = User
-        fields = ('email', 'password')
-        labels = {
-            'email': 'Correo electronico',
-            'password': 'Contraseña',
-        }
+        fields = ('emailLog', 'passwordLog')
 
 class RegisterUserForm(forms.ModelForm):
     password1 = forms.CharField(

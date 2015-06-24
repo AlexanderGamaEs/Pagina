@@ -5,8 +5,7 @@ from familia import views as familia_views
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^familia/register/$', familia_views.register, name='register'),
-    url(r'^familia/login/$', familia_views.login, name='login'),
+    url(r'^familia/', include('familia.urls')),
     url(r'^main/', include('main.urls')), 
     url(r'^$', main_views.index, name='index'),
 )
