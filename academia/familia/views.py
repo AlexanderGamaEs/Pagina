@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as loginUser
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from familia.forms import LoginUserForm, RegisterUserForm, RegisterUserProfileForm
@@ -15,15 +16,19 @@ def login(request):
     if request.method == 'POST':
         user_form = LoginUserForm(data=request.POST)
 
-        userWithEmail = get_object_or_404(User, email=user_form.data.get('email'))
-        user = authenticate(username=userWithEmail, password=user_form.data.get('password'))
+        email = user_form.data.get('emailLog')
+        print()
+        print(email)
+        print()
+        userWithEmail = User.objects.get(email=email)
+        user = authenticate(username=userWithEmail, password=user_form.data.get('passwordLog'))
 
         if user:
             if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/user/')
+                loginUser(request, user)
+                return HttpResponseRedirect('/familia/')
         else:
-            print("Invalid login details: {0}, {1}".format(email, password))
+            print("Invalid login details: {0}".format(userWithEmail))
             return HttpResponse("Invalid login details supplied.")
     else:
         user_form = LoginUserForm()

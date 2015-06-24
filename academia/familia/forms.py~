@@ -14,6 +14,8 @@ class LoginUserForm(forms.ModelForm):
 
     def clean(self):
         data = super(LoginUserForm, self).clean()
+        email = self.data.get('emailLog')
+        password = self.data.get('passwordLog')
     
     class Meta:
         model = User
@@ -46,8 +48,16 @@ class RegisterUserForm(forms.ModelForm):
         user = super(RegisterUserForm, self).save(commit=False)
         user.set_password(self.data.get("password1"))
 
+<<<<<<< HEAD
         nUserName = "".join(self.data.get("first_name").split() + self.data.get("last_name").split())
         user.username = nUserName[0:40] if (len(nUserName) > 40) else nUserName
+||||||| merged common ancestors
+        nUserName = "".join(data.get("first_name").split() + data.get("last_name").split())
+        user.set_username((len(nUserName) > 40)? nUserName[0:40] : nUserName)
+=======
+        nUserName = "".join(data.get("first_name").split() + data.get("last_name").split())
+        user.set_username( nUserName[0:39] if (len(nUserName) > 40) else nUserName)
+>>>>>>> origin/develop
 
         if commit:
             user.save()
