@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from academiaCore.models import UserProfile
+from django.core.exceptions import ObjectDoesNotExist
 
 class LoginUserForm(forms.ModelForm):
     emailLog = forms.CharField(
@@ -14,6 +15,11 @@ class LoginUserForm(forms.ModelForm):
 
     def clean(self):
         data = super(LoginUserForm, self).clean()
+        if(data.get('emailLog')):
+            try:
+                User.objects.get(email=data.get('emailLog'))
+            except ObjectDoesNotExist:
+                self.add_error('emailLog', "Este correo electronico no esta registrado.")
     
     class Meta:
         model = User
@@ -32,9 +38,19 @@ class RegisterUserForm(forms.ModelForm):
         max_length=40,)
 
     def clean(self):
+        print("ToT")
         data = super(RegisterUserForm, self).clean()
         password1_data = data.get("password1")
         password2_data = data.get("password2")
+        try:
+            User.objects.get(email=data.get('email'))
+            self.add_error('email', "Este correo electronico ya esta registrado")
+            raise forms.ValidationError(
+                    "Did not send for 'help' in the subject despite "
+                    "CC'ing yourself."
+                )
+        except Exception:
+            pass
 
         if not (password1_data and password2_data) and password1_data != password2_data:
             msg = "Las contraseñas no coinciden"

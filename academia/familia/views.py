@@ -1,41 +1,44 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as loginUser
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
 from familia.forms import LoginUserForm, RegisterUserForm, RegisterUserProfileForm
 
 def index(request):
     if not request.user.is_authenticated():
-        return login(request)
+        return user_login(request)
     
-    return HttpResponse("Index: En construcción " + request.user.get_username())
+    return HttpResponse("Index: En construcción " + request.user.get_username() + "<a href='logout/''><p>Cerrar sesión</p></a>")
 
-def login(request):
+def user_login(request):
     if request.method == 'POST':
         user_form = LoginUserForm(data=request.POST)
 
-        email = user_form.data.get('emailLog')
-        print()
-        print(email)
-        print()
-        userWithEmail = User.objects.get(email=email)
-        user = authenticate(username=userWithEmail, password=user_form.data.get('passwordLog'))
-
-        if user:
-            if user.is_active:
-                loginUser(request, user)
-                return HttpResponseRedirect('/familia/')
+        if user_form.is_valid(): 
+            print(user_form.data.get('emailLog'))
+            userWithEmail = User.objects.get(email=user_form.data.get('emailLog')) #En la funcion cleaned la forma se comprobo que existiera el usuario
+            user = authenticate(username=userWithEmail, password=user_form.data.get('passwordLog'))
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/familia/')
+            else:
+                return HttpResponse("Datos de inicio invalidos")
         else:
-            print("Invalid login details: {0}".format(userWithEmail))
-            return HttpResponse("Invalid login details supplied.")
+        	print(user_form.errors)
+        	return render(request, 'core/login.htm', {'user_form': user_form})
     else:
         user_form = LoginUserForm()
         return render(request, 'core/login.htm', {'user_form': user_form})
 
+def user_logout(request):
+    logout(request)
 
-def register(request):
+    return HttpResponseRedirect(reverse('familia'))
+
+
+def user_register(request):
     registered = False
 
     if request.method == 'POST':
