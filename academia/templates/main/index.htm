@@ -10,6 +10,12 @@
        var height = $((window).width() * 650)/1366;
        $window.height(height);
     });
+
+    $(document).ready(function(){
+    $('#item-suscribirse"').click(function(){
+        $('#main-content/').load('/rest/suscribirse/');
+    });
+})
   </script>
 {% endblock %}
 
@@ -20,9 +26,20 @@
   		<h1 class="lema">"Nada es perfecto, todo es perfectible."</h1>
   	</div>
 
+    <div id="main-content">
+
+    </div>
+
+    <a>
+      <image class="items" id="item-suscribirse"></image></image>
+    </a>
+
+    <a href="/familia/">
+      <image class="items" id="item-contacto"></image></image>
+    </a>
+
     <a href="/familia/">
       <image class="items" id="item-familia"></image></image>
     </a>
   	
-  	<img class="">
 {% endblock %}

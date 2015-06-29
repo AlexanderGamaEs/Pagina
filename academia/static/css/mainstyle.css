@@ -73,21 +73,49 @@ body{
 .items{
 	margin: 0;low;
     position: absolute;
-    top: 36%;
-    left: 90%;
-    width: 8%;
-    height: 16%;
     min-width: 16px;
     min-height: 18px;
 }
 
 #item-familia{
+    top: 37%;
+    left: 89.5%;
+    width: 8%;
+    height: 15%;
     background:transparent url(/static/images/items/item3.png) no-repeat top left;
     background-size: 100% 100%;
 }
 
 #item-familia:hover{
     background:transparent url(/static/images/items/item3hover.png) no-repeat top left;
+    background-size: 100% 100%;
+}
+
+#item-suscribirse{
+    top: 12.6%;
+    left: 89%;
+    width: 10%;
+    height: 12%;
+    background:transparent url(/static/images/items/item1.png) no-repeat top left;
+    background-size: 100% 100%;
+}
+
+#item-suscribirse:hover{
+    background:transparent url(/static/images/items/item1hover.png) no-repeat top left;
+    background-size: 100% 100%;
+}
+
+#item-contacto{
+    top: 21%;
+    left: 89%;
+    width: 10%;
+    height: 18%;
+    background:transparent url(/static/images/items/item2.png) no-repeat top left;
+    background-size: 100% 100%;
+}
+
+#item-contacto:hover{
+    background:transparent url(/static/images/items/item2hover.png) no-repeat top left;
     background-size: 100% 100%;
 }
 

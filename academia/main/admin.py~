@@ -1,2 +1,7 @@
 from django.contrib import admin
-# Register your models here.
+from main.models import SectionMainPage
+
+class SectionMainPageAdmin(admin.ModelAdmin):
+    fields = ('user_type', 'birthday')
+
+admin.site.register(UserProfile, UserProfileAdmin)
