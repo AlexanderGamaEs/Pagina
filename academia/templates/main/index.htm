@@ -12,10 +12,19 @@
     });
 
     $(document).ready(function(){
-    $('#item-suscribirse"').click(function(){
-        $('#main-content/').load('/rest/suscribirse/');
+    $('#item-suscribirse').click(function(){
+        $('#main-content').load('main/rest/suscribirse/');
     });
-})
+    $('#item-contacto').click(function(){
+        $('#main-content').load('main/rest/contacto/');
+
+    });
+    $('#item-familia').click(function(){
+        $('#main-content').load('main/rest/familia/');
+    });
+  });
+
+
   </script>
 {% endblock %}
 

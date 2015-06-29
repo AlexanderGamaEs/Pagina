@@ -7,9 +7,17 @@ from rest_framework import generics
 from main.models import SectionMainPage
 from main.serializers import SectionMainPageSerializer
 
-class SectionList(generics.ListCreateAPIView):
-    queryset = SectionMainPage.objects.all()
-    serializer_class = SectionMainPageSerializer
+class SectionList(APIView):
+    def get(self, request, name, format=None):
+        try:
+            sections = SectionMainPage.objects.get(name=name)
+        except Snippet.DoesNotExist:
+            raise Http404 
+        serializer = SectionMainPageSerializer(sections, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, name, format=None):
+        return self.get(self, request, name, format=format)
 
 def index(request):
     return render(request, 'main/index.htm')
