@@ -13,14 +13,14 @@
 
     $(document).ready(function(){
     $('#item-suscribirse').click(function(){
-        $('#main-content').load('main/rest/suscribirse/');
+        $('#main-content').load('main/rest/suscribirse/?format=json');
     });
     $('#item-contacto').click(function(){
-        $('#main-content').load('main/rest/contacto/');
+        $('#main-content').load('main/rest/contacto/?format=json');
 
     });
     $('#item-familia').click(function(){
-        $('#main-content').load('main/rest/familia/');
+        $('#main-content').load('main/rest/familia/?format=json');
     });
   });
 
@@ -43,11 +43,11 @@
       <image class="items" id="item-suscribirse"></image></image>
     </a>
 
-    <a href="/familia/">
+    <a>
       <image class="items" id="item-contacto"></image></image>
     </a>
 
-    <a href="/familia/">
+    <a>
       <image class="items" id="item-familia"></image></image>
     </a>
   	

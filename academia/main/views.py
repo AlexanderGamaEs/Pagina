@@ -13,7 +13,7 @@ class SectionList(APIView):
             sections = SectionMainPage.objects.get(name=name)
         except Snippet.DoesNotExist:
             raise Http404 
-        serializer = SectionMainPageSerializer(sections, many=True)
+        serializer = SectionMainPageSerializer(sections)
         return Response(serializer.data)
 
     def post(self, request, name, format=None):
